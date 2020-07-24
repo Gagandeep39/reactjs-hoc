@@ -16,6 +16,9 @@ const Cockpit = (props) => {
   useEffect(
     () => {
       console.log('[Cockpit.js] UseEffect');
+      return () => {
+        console.log('Clean Up Work in use Effect');
+      }
     },
     // Allows specifuying when it will be eecuted, eg. hre it will execute when person changes
     [props.person]
