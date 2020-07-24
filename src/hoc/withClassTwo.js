@@ -8,9 +8,10 @@ import React from 'react';
 const withClassTwo = (WrappedComponent, className) => {
   return props => (
     <div className={className}>
-      <WrappedComponent />
+      <WrappedComponent {...props}/>
     </div>
   );
 }
+// {...props} pulls out all components and distributes them as key value pairs
 
 export default withClassTwo;
