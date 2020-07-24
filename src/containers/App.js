@@ -23,6 +23,7 @@ class App extends Component {
       ],
       otherState: 'Lol xD',
       buttonState: false,
+      authenticated: false
     };
   }
 
@@ -69,6 +70,10 @@ class App extends Component {
     });
   };
 
+  authenticationHandler = () => {
+    this.setState({authenticated: true});
+  }
+
   // 1. Component State Update Lifecycle
   shouldComponentUpdate(nextProps, nextState) {
     console.log('[App.js] shouldComponentUpdate');
@@ -91,6 +96,7 @@ class App extends Component {
           persons={this.state.persons}
           change={this.nameChangeHandler}
           deleteButton={this.deleteButtonHandler}
+          isAuthenticated={this.state.authenticated}
         />
       );
     } else personView = null;
@@ -125,6 +131,7 @@ class App extends Component {
           persons={this.state.persons}
           buttonState={this.state.buttonState}
           button={this.showHideButtonHandler}
+          login={this.authenticationHandler}
         />
         {personView}
       </Auxiliary>

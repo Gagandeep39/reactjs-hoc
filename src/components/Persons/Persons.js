@@ -49,6 +49,7 @@ class Persons extends Component {
           name={person.name}
           age={person.age}
           deleteButton={() => this.props.deleteButton(index)}
+          isAuth={this.props.isAuthenticated}
         />
       );
     });

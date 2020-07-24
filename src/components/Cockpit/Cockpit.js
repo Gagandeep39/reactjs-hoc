@@ -41,7 +41,8 @@ const Cockpit = (props) => {
       <p key="i1" className={assignedClasses}>Delete Elements tp chnge Css styling</p>,
       <button key="i2" ref={buttonRef} className={btnClass.join(' ')} onClick={props.button}>
         Show/Hide Persons
-      </button>
+      </button>,
+      <button onClick={props.login}>Login Button</button>
   ];
 };
 

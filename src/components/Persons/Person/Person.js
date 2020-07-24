@@ -23,6 +23,8 @@ class Person extends Component {
 
     return (
       <Auxiliary>
+        {/* If doesn;t work try toglling show/hide button */}
+        {this.props.isAuth ? <p>Authenticated</p> : <p>Please Login</p>}
         <p> I'm a Person!</p>
         <p>
           Name provided as attribute: {this.props.name}, age: {this.props.age}{' '}
