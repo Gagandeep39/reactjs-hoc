@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import classes from './Cockpit.module.css';
 
 const Cockpit = (props) => {
@@ -36,4 +36,5 @@ const Cockpit = (props) => {
   );
 };
 
-export default Cockpit;
+// Memo Allowsreact to memorize the components and precvents rendering if there is no change
+export default React.memo(Cockpit);

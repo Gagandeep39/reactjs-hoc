@@ -12,6 +12,7 @@ class Persons extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     if(nextProps.persons === this.props.persons) {
       // No need to executet futher if there is no change
+      // Make sure how its being used, as array uses pointer and hence if will be different only when array occupies a new location in memory
       return false;
     }
     console.log('[Persons.js] shouldComponentUpdate');
