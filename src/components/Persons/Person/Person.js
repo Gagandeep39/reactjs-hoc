@@ -12,12 +12,15 @@ class Person extends Component {
     this.inputRef = React.createRef();
   }
 
+  static contextType = AuthContext;
   // Lifecycle hook that excutes after component is created
   componentDidMount() {
     // This will focus the last element
     // Focus will be executed for all person, tand in the end last person input will be in focus
     this.inputRef.current.focus();
+    console.log(this.context.authenticated);
   }
+
 
   render() {
     console.log('[Person.js] Rendering');
@@ -25,11 +28,12 @@ class Person extends Component {
     return (
       <Auxiliary>
         {/* If doesn;t work try toglling show/hide button */}
-        <AuthContext.Consumer>
+        {/* <AuthContext.Consumer>
           {
             (context) => context.authenticated ? <p>Authenticated</p> : <p>Please Login</p>
           }
-        </AuthContext.Consumer>
+        </AuthContext.Consumer> */}
+        {this.context.authenticated ? <p>Authenticated</p> : <p>Please Login</p>}
         <p> I'm a Person!</p>
         <p>
           Name provided as attribute: {this.props.name}, age: {this.props.age}{' '}
