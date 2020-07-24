@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import classes from './App.module.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
-import WithClass from '../hoc/WithClass';
+// import WithClass from '../hoc/WithClass'
+import withClassTwo from '../hoc/withClassTwo';
+import Auxiliary from '../hoc/Auxiliary';
 
 class App extends Component {
   // 1. Compnent Creation Life Cycle Step
@@ -104,8 +106,19 @@ class App extends Component {
       //   {personView}
       // </div>
 
-      
-      <WithClass classes={classes}>
+      // Method 2 - Best
+      // <WithClass classes={classes}>
+      //   {/* 4. Compnent Creation Life Cycle Step - Life Cycle of Child Component */}
+      //   <Cockpit
+      //     persons={this.state.persons}
+      //     buttonState={this.state.buttonState}
+      //     button={this.showHideButtonHandler}
+      //   />
+      //   {personView}
+      // </WithClass>
+
+      // Method 3
+      <Auxiliary>
         {/* 4. Compnent Creation Life Cycle Step - Life Cycle of Child Component */}
         <Cockpit
           persons={this.state.persons}
@@ -113,12 +126,12 @@ class App extends Component {
           button={this.showHideButtonHandler}
         />
         {personView}
-      </WithClass>
+      </Auxiliary>
     );
   }
 }
 
-export default App;
+export default withClassTwo(App, classes.App);
 
 // Life Cycle Flow
 // [App.js] constructor
