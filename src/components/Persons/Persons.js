@@ -10,6 +10,10 @@ class Persons extends Component {
 
   // 2. Component Update Lifecycle -
   shouldComponentUpdate(nextProps, nextState) {
+    if(nextProps.persons === this.props.persons) {
+      // No need to executet futher if there is no change
+      return false;
+    }
     console.log('[Persons.js] shouldComponentUpdate');
     return true;
   }
@@ -26,6 +30,11 @@ class Persons extends Component {
     console.log('[Persons.js] componentDidUpdate');
     // Snapshot contaisn the value returned in 'getSnapshotBeforeUpdate' method
     console.log(snapshot);
+  }
+
+  //Normally used for cleanup
+  componentWillUnmount(){
+    console.log('[Persons.js] Used for Clean Up');
   }
 
   // 3. Component Update Lifecycle - Remdering of UI, CHildren Component
