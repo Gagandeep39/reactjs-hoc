@@ -4,6 +4,7 @@ import React from 'react';
 // Here wrapped Component is a reference to other component
 // className is sued for providing 
 // To use this, we also need Aux
+// Must beuse when Logic is important compared to UI
 const withClassTwo = (WrappedComponent, className) => {
   return props => (
     <div className={className}>

@@ -118,6 +118,7 @@ class App extends Component {
       // </WithClass>
 
       // Method 3
+      // Must beuse when Logic is important compared to UI
       <Auxiliary>
         {/* 4. Compnent Creation Life Cycle Step - Life Cycle of Child Component */}
         <Cockpit
