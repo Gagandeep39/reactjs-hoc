@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import classes from './Person.module.css';
 import Auxiliary from '../../../hoc/Auxiliary';
 import withClassTwo from '../../../hoc/withClassTwo';
+import PropTypes from 'prop-types';
 
 class Person extends Component {
   render() {
@@ -23,4 +24,11 @@ class Person extends Component {
   }
 }
 
+// To test the working, give name a a numebr and check the console for warning
+Person.propTypes = {
+  click: PropTypes.func, // Pointer to a function
+  name: PropTypes.string,
+  age: PropTypes.number,
+  change: PropTypes.func
+};
 export default withClassTwo(Person, classes.Person);
