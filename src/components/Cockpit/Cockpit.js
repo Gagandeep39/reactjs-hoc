@@ -26,14 +26,21 @@ const Cockpit = (props) => {
     // []
   );
 
-  return (
-    <div>
-      <p className={assignedClasses}>Delete Elements tp chnge Css styling</p>
-      <button className={btnClass.join(' ')} onClick={props.button}>
+  // return (
+  //   <div>
+  //     <p className={assignedClasses}>Delete Elements tp chnge Css styling</p>
+  //     <button className={btnClass.join(' ')} onClick={props.button}>
+  //       Show/Hide Persons
+  //     </button>
+  //   </div>
+  // );
+
+  return [
+      <p key="i1" className={assignedClasses}>Delete Elements tp chnge Css styling</p>,
+      <button key="i2" className={btnClass.join(' ')} onClick={props.button}>
         Show/Hide Persons
       </button>
-    </div>
-  );
+  ];
 };
 
 // Memo Allowsreact to memorize the components and precvents rendering if there is no change
