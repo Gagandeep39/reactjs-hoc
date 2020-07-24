@@ -5,6 +5,7 @@ import Cockpit from '../components/Cockpit/Cockpit';
 // import WithClass from '../hoc/WithClass'
 import withClassTwo from '../hoc/withClassTwo';
 import Auxiliary from '../hoc/Auxiliary';
+import AuthContext from '../context/auth-context';
 
 class App extends Component {
   // 1. Compnent Creation Life Cycle Step
@@ -23,7 +24,7 @@ class App extends Component {
       ],
       otherState: 'Lol xD',
       buttonState: false,
-      authenticated: false
+      authenticated: false,
     };
   }
 
@@ -71,8 +72,8 @@ class App extends Component {
   };
 
   authenticationHandler = () => {
-    this.setState({authenticated: true});
-  }
+    this.setState({ authenticated: true });
+  };
 
   // 1. Component State Update Lifecycle
   shouldComponentUpdate(nextProps, nextState) {
@@ -80,7 +81,7 @@ class App extends Component {
     return true;
   }
 
-// 2. Component State Update Lifecycle
+  // 2. Component State Update Lifecycle
   componentDidUpdate() {
     console.log('[App.js] componentDidUpdate');
   }
@@ -127,13 +128,15 @@ class App extends Component {
       // Must beuse when Logic is important compared to UI
       <Auxiliary>
         {/* 4. Compnent Creation Life Cycle Step - Life Cycle of Child Component */}
-        <Cockpit
-          persons={this.state.persons}
-          buttonState={this.state.buttonState}
-          button={this.showHideButtonHandler}
-          login={this.authenticationHandler}
-        />
-        {personView}
+        {/* Here cockpit uses authentication data (To login/lout) and personView uses authentication data  */}
+        <AuthContext.Provider value={{authenticated: this.state.authenticated, login: this.authenticationHandler}}>
+          <Cockpit
+            persons={this.state.persons}
+            buttonState={this.state.buttonState}
+            button={this.showHideButtonHandler}
+          />
+          {personView}
+        </AuthContext.Provider>
       </Auxiliary>
     );
   }

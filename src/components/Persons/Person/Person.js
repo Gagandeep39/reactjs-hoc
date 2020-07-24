@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import classes from './Person.module.css';
 import Auxiliary from '../../../hoc/Auxiliary';
 import withClassTwo from '../../../hoc/withClassTwo';
+import AuthContext from '../../../context/auth-context';
 import PropTypes from 'prop-types';
 
 class Person extends Component {
@@ -24,7 +25,11 @@ class Person extends Component {
     return (
       <Auxiliary>
         {/* If doesn;t work try toglling show/hide button */}
-        {this.props.isAuth ? <p>Authenticated</p> : <p>Please Login</p>}
+        <AuthContext.Consumer>
+          {
+            (context) => context.authenticated ? <p>Authenticated</p> : <p>Please Login</p>
+          }
+        </AuthContext.Consumer>
         <p> I'm a Person!</p>
         <p>
           Name provided as attribute: {this.props.name}, age: {this.props.age}{' '}
