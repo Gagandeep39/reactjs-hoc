@@ -5,6 +5,14 @@ import withClassTwo from '../../../hoc/withClassTwo';
 import PropTypes from 'prop-types';
 
 class Person extends Component {
+
+  // Lifecycle hook that excutes after component is created
+  componentDidMount() {
+    // This will focus the last element
+    // Focus will be executed for all person, tand in the end last person input will be in focus
+    this.inputRef.focus();
+  }
+
   render() {
     console.log('[Person.js] Rendering');
 
@@ -18,7 +26,7 @@ class Person extends Component {
         <p> {this.props.children} </p>
         <button onClick={this.props.deleteButton}>Delete</button>
         <br />
-        <input type='text' onChange={this.props.change} />
+        <input type='text' ref={(inputElement) => {this.inputRef = inputElement}} onChange={this.props.change} />
       </Auxiliary>
     );
   }
