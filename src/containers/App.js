@@ -4,9 +4,10 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
-
+  // 1. Compnent Creation Life Cycle Step
   constructor(props) {
     super(props);
+    console.log('[App.js] constructor');
     // Initial State
     // Can be declared inside or outside of constructor
     // If declared ouside then it will act as executed in constructor by itself
@@ -20,6 +21,21 @@ class App extends Component {
       otherState: 'Lol xD',
       buttonState: false,
     };
+  }
+
+  // 2. Compnent Creation Life Cycle Step
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js] getDerivedStateFromProps', props);
+    return state;
+  }
+
+  componentWillMount() {
+    console.log('[App.js] componentWillMount');
+  }
+
+  // 5. Compnent Creation Life Cycle Step
+  componentDidMount() {
+    console.log('[App.js] componentDidMount');
   }
 
   // Handler Method
@@ -50,10 +66,13 @@ class App extends Component {
     });
   };
 
+  // 3. Compnent Creation Life Cycle Step
   render() {
+    console.log('[App.js] Render');
     let personView = null;
     if (this.state.buttonState) {
       personView = (
+        // 4. Compnent Creation Life Cycle Step - Life Cycle of Child Component
         <Persons
           persons={this.state.persons}
           change={this.nameChangeHandler}
@@ -64,6 +83,7 @@ class App extends Component {
 
     return (
       <div className={classes.App}>
+        {/* 4. Compnent Creation Life Cycle Step - Life Cycle of Child Component */}
         <Cockpit
           persons={this.state.persons}
           buttonState={this.state.buttonState}
