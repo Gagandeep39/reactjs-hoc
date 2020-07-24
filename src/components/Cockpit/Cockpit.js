@@ -1,8 +1,10 @@
-import React, { useEffect, memo, useRef } from 'react';
+import React, { useEffect, memo, useRef, useContext } from 'react';
 import classes from './Cockpit.module.css';
 import AuthContext from '../../context/auth-context';
 
 const Cockpit = (props) => {
+  const context = useContext(AuthContext)
+  console.log(context.authenticated);
   const buttonRef = useRef(null);
   let assignedClasses = [];
   let btnClass = [classes.Button];
@@ -43,9 +45,10 @@ const Cockpit = (props) => {
       <button key="i2" ref={buttonRef} className={btnClass.join(' ')} onClick={props.button}>
         Show/Hide Persons
       </button>,
-      <AuthContext.Consumer>
-        {(context) => <button onClick={context.login}>Login Button</button>}
-      </AuthContext.Consumer>
+      // <AuthContext.Consumer>
+      //   {(context) => <button onClick={context.login}>Login Button</button>}
+      // </AuthContext.Consumer>
+      <button onClick={context.login}>Login Button</button>
       
   ];
 };
