@@ -1,72 +1,78 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import classes from './App.module.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
-function App() {
-  const [personState, setPersonState] = useState({
-    persons: [
-      { id: 'dfghyj', name: 'Gagan', age: 0 },
-      { id: 'dgfhj', name: 'Ralts', age: 1 },
-      { id: 'dfxgthy', name: 'Mewtwo', age: 2 },
-      { id: 'cdfvgb', name: 'Gallade', age: 3 },
-    ],
-    otherState: 'Lol xD',
-  });
+class App extends Component {
 
-  // Will be executed whenever data is entered in text box
-  const nameChangeHandler = (event, id) => {
-    const personIndex = personState.persons.findIndex((p) => p.id === id);
-    const person = { ...personState.persons[personIndex] };
+  constructor(props) {
+    super(props);
+    // Initial State
+    // Can be declared inside or outside of constructor
+    // If declared ouside then it will act as executed in constructor by itself
+    this.state = {
+      persons: [
+        { id: 'dfghyj', name: 'Gagan', age: 0 },
+        { id: 'dgfhj', name: 'Ralts', age: 1 },
+        { id: 'dfxgthy', name: 'Mewtwo', age: 2 },
+        { id: 'cdfvgb', name: 'Gallade', age: 3 },
+      ],
+      otherState: 'Lol xD',
+      buttonState: false,
+    };
+  }
+
+  // Handler Method
+  nameChangeHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex((p) => p.id === id);
+    const person = { ...this.state.persons[personIndex] };
     person.name = event.target.value;
-    const persons = [...personState.persons];
+    const persons = [...this.state.persons];
     persons[personIndex] = person;
 
-    setPersonState({
+    this.setState({
       persons: persons,
     });
-    console.log('Name change Method executed');
   };
 
-  const [showHideState, setShowHideState] = useState({
-    buttonState: false,
-  });
+  // Handler Method
+  deleteButtonHandler = (personIndex) => {
+    // Ass a good prcatie we must always update the arryain immute manner i.e without changing inital state
+    const persons = [...this.state.persons];
+    persons.splice(personIndex, 1);
+    this.setState({ persons: persons });
+  };
 
-  const showHideButtonHandler = (event) => {
-    console.log('Toggled show hide');
-    setShowHideState({
-      buttonState: !showHideState.buttonState,
+  // Handler Method
+  showHideButtonHandler = (event) => {
+    this.setState({
+      buttonState: !this.state.buttonState,
     });
   };
 
-  const deleteButtonHandler = (personIndex) => {
-    // Ass a good prcatie we must always update the arryain immute manner i.e without changing inital state
-    const persons = [...personState.persons];
-    persons.splice(personIndex, 1);
-    setPersonState({ persons: persons });
-  };
+  render() {
+    let personView = null;
+    if (this.state.buttonState) {
+      personView = (
+        <Persons
+          persons={this.state.persons}
+          change={this.nameChangeHandler}
+          deleteButton={this.deleteButtonHandler}
+        />
+      );
+    } else personView = null;
 
-  let personView = null;
-  if (showHideState.buttonState) {
-    personView = (
-      <Persons
-        persons={personState.persons}
-        change={nameChangeHandler}
-        deleteButton={deleteButtonHandler}
-      />
+    return (
+      <div className={classes.App}>
+        <Cockpit
+          persons={this.state.persons}
+          buttonState={this.state.buttonState}
+          button={this.showHideButtonHandler}
+        />
+        {personView}
+      </div>
     );
-  } else personView = null;
-
-  return (
-    <div className={classes.App}>
-      <Cockpit
-        persons={personState.persons}
-        buttonState={showHideState.buttonState}
-        button={showHideButtonHandler}
-      />
-      {personView}
-    </div>
-  );
+  }
 }
 
 export default App;
