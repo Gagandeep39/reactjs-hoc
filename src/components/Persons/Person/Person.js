@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import classes from './Person.module.css';
+import Auxiliary from '../../../hoc/Auxiliary';
 
 class Person extends Component {
   render() {
     console.log('[Person.js] Rendering');
 
     return (
-      <div className={classes.Person}>
+      <Auxiliary>
         <p> I'm a Person!</p>
         <p>
           Name provided as attribute: {this.props.name}, age: {this.props.age}{' '}
@@ -16,7 +17,7 @@ class Person extends Component {
         <button onClick={this.props.deleteButton}>Delete</button>
         <br />
         <input type='text' onChange={this.props.change} />
-      </div>
+      </Auxiliary>
     );
   }
 }
