@@ -1,7 +1,8 @@
-import React, { useEffect, memo } from 'react';
+import React, { useEffect, memo, useRef } from 'react';
 import classes from './Cockpit.module.css';
 
 const Cockpit = (props) => {
+  const buttonRef = useRef(null);
   let assignedClasses = [];
   let btnClass = [classes.Button];
 
@@ -16,14 +17,15 @@ const Cockpit = (props) => {
   useEffect(
     () => {
       console.log('[Cockpit.js] UseEffect');
+      buttonRef.current.click();
       return () => {
         console.log('Clean Up Work in use Effect');
       }
     },
     // Allows specifuying when it will be eecuted, eg. hre it will execute when person changes
-    [props.person]
+    // [props.person]
     // To execute it only once or the first time, we pass and empty array
-    // []
+    []
   );
 
   // return (
@@ -37,7 +39,7 @@ const Cockpit = (props) => {
 
   return [
       <p key="i1" className={assignedClasses}>Delete Elements tp chnge Css styling</p>,
-      <button key="i2" className={btnClass.join(' ')} onClick={props.button}>
+      <button key="i2" ref={buttonRef} className={btnClass.join(' ')} onClick={props.button}>
         Show/Hide Persons
       </button>
   ];
