@@ -66,6 +66,17 @@ class App extends Component {
     });
   };
 
+  // 1. Component State Update Lifecycle
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('[App.js] shouldComponentUpdate');
+    return true;
+  }
+
+// 2. Component State Update Lifecycle
+  componentDidUpdate() {
+    console.log('[App.js] componentDidUpdate');
+  }
+
   // 3. Compnent Creation Life Cycle Step
   render() {
     console.log('[App.js] Render');
@@ -96,3 +107,16 @@ class App extends Component {
 }
 
 export default App;
+
+// Life Cycle Flow
+// [App.js] constructor
+// App.js:28 [App.js] getDerivedStateFromProps {}
+// App.js:82 [App.js] Render
+// App.js:38 [App.js] componentDidMount
+// App.js:28 [App.js] getDerivedStateFromProps {}
+// App.js:71 [App.js] shouldComponentUpdate
+// App.js:82 [App.js] Render
+// Persons.js:7 [Persons.js] getDerivedStateFromProps
+// Persons.js:33 [Persons.js] Rendering
+// Person.js:6 [Person.js] Rendering
+// App.js:77 [App.js] componentDidUpdate
