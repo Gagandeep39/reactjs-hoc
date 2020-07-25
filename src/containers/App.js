@@ -6,6 +6,7 @@ import Cockpit from '../components/Cockpit/Cockpit';
 import withClassTwo from '../hoc/withClassTwo';
 import Auxiliary from '../hoc/Auxiliary';
 import AuthContext from '../context/auth-context';
+import ErrorBoundary from '../hoc/ErrorBoundary';
 
 class App extends Component {
   // 1. Compnent Creation Life Cycle Step
@@ -86,6 +87,11 @@ class App extends Component {
     console.log('[App.js] componentDidUpdate');
   }
 
+  // May not work while testing
+  handleError() {
+    throw new Error('Lol, Testning Error Boundary')
+  }
+
   // 3. Compnent Creation Life Cycle Step
   render() {
     console.log('[App.js] Render');
@@ -126,7 +132,8 @@ class App extends Component {
 
       // Method 3
       // Must beuse when Logic is important compared to UI
-      <Auxiliary>
+      <ErrorBoundary ket="12w34">
+        <Auxiliary>
         {/* 4. Compnent Creation Life Cycle Step - Life Cycle of Child Component */}
         {/* Here cockpit uses authentication data (To login/lout) and personView uses authentication data  */}
         <AuthContext.Provider value={{authenticated: this.state.authenticated, login: this.authenticationHandler}}>
@@ -137,7 +144,9 @@ class App extends Component {
           />
           {personView}
         </AuthContext.Provider>
+        <button onClick={this.handleError}>Test Error Boundary</button>
       </Auxiliary>
+      </ErrorBoundary>
     );
   }
 }
